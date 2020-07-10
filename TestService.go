@@ -12,10 +12,17 @@ type testHandler struct {
 func (t* testHandler)  ServeHTTP(w http.ResponseWriter, r *http.Request){
 	w.Write([]byte(t.Message))
 }
+
+func testBHandler(w http.ResponseWriter, r *http.Request){
+	w.Write([]byte("testb handler"))
+
+}
 func main(){
-	//fmt.Println("hello")
+	
 	http.Handle("/test", &testHandler{Message: "testMsg"})
+	http.HandleFunc("/testB", testBHandler)
     http.ListenAndServe(":5000",nil)
 
 }
+
 
